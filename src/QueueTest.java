@@ -1,4 +1,7 @@
+import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class QueueTest extends TestSequence {
 
@@ -14,23 +17,32 @@ public class QueueTest extends TestSequence {
             private LinkedTransferQueue<Integer> queue = new LinkedTransferQueue<>();
 
             @Override
-            public void readOperation() {
-                queue.peek();
+            public Object readOperation() {
+                return queue.peek();
             }
 
             @Override
-            public void updateOperation() {
-                queue.poll();
+            public Object updateOperation() {
+                return queue.poll();
             }
 
             @Override
-            public void iterateOperation() {
-                queue.iterator();
+            public Object iterateOperation() {
+                AtomicReference<Integer> dummy = new AtomicReference<>(0);
+                queue.forEach(dummy::set);
+                return dummy;
             }
 
             @Override
-            public void resetCollection() {
+            public Object fillCollection(Collection<Integer> start) {
+                queue.addAll(start);
+                return Collections.unmodifiableCollection(queue);
+            }
+
+            @Override
+            public Object resetCollection() {
                 queue = new LinkedTransferQueue<>();
+                return Collections.unmodifiableCollection(queue);
             }
         };
     }

@@ -1,9 +1,11 @@
+import java.util.Collection;
 
 public interface CollectionToTest {
 
-    void readOperation();
-    void updateOperation();
-    void iterateOperation();
-    void resetCollection();
+    Object readOperation();
+    Object updateOperation();
+    Object iterateOperation();
+    Object fillCollection(Collection<Integer> start);
+    Object resetCollection();
 
 }

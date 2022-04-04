@@ -1,4 +1,9 @@
+import java.util.*;
+
 public abstract class TestSequence {
+
+    // Class variabels
+    private static final int WARM_UP_ITERATIONS = 12000;
 
     // Instance variables
     private final int numberOfThreads;
@@ -22,6 +27,9 @@ public abstract class TestSequence {
         this.collection = createCollectionToTest();
         this.testers = createTester(numberOfThreads, readPercent, updatePercent, iteratePercent, collection);
         this.threads = createThreads(this.testers);
+
+        warmUpTest();
+        runTest();
     }
 
     // Methods
@@ -40,6 +48,30 @@ public abstract class TestSequence {
             threads[i] = new Thread(testers[i]);
         }
         return threads;
+    }
+
+    private void warmUpTest() {
+        Collection<Integer> values = new ArrayList<>(WARM_UP_ITERATIONS);
+        for (int i = 0; i < WARM_UP_ITERATIONS; i++) {
+            values.add(Utilities.randomInt(WARM_UP_ITERATIONS));
+        }
+        collection.fillCollection(values);
+
+        for (int i = 0; i < WARM_UP_ITERATIONS; i++) {
+            collection.readOperation();
+            collection.updateOperation();
+            collection.iterateOperation();
+        }
+
+        collection.resetCollection();
+        System.gc();
+    }
+
+    private void runTest() {
+
+
+        collection.resetCollection();
+        System.gc();
     }
 
 }
