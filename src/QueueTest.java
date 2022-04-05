@@ -23,7 +23,9 @@ public class QueueTest extends TestSequence {
 
             @Override
             public Object updateOperation() {
-                return queue.poll();
+                int dummy = queue.poll();
+                queue.put(dummy);
+                return dummy;
             }
 
             @Override

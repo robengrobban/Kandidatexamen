@@ -40,7 +40,7 @@ public class Tester implements Runnable {
     public void run() {
         int currentOperation = 0;
         do {
-            switch (sequence[currentOperation]) {
+            switch (sequence[currentOperation % sequence.length]) {
                 case READ:
                     collection.readOperation();
                     operations++;
