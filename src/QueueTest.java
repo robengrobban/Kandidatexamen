@@ -37,6 +37,7 @@ public class QueueTest extends TestSequence {
 
             @Override
             public Object fillCollection(Collection<Integer> start) {
+                queue.clear();
                 queue.addAll(start);
                 return Collections.unmodifiableCollection(queue);
             }

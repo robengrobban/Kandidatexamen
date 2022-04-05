@@ -2,26 +2,24 @@ public class Tester implements Runnable {
 
     // Instance variables
     private int operations;
+    private final int readPercent;
+    private final int updatePercent;
+    private final int iteratePercent;
     private final Operation[] sequence;
     private final CollectionToTest collection;
 
     // Constructors
     public Tester(int readPercent, int updatePercent, int iteratePercent, CollectionToTest collection) {
         this.operations = 0;
-        this.sequence = createOperationSequence(readPercent, updatePercent, iteratePercent);
+        this.readPercent = readPercent;
+        this.updatePercent = updatePercent;
+        this.iteratePercent = iteratePercent;
+        this.sequence = createOperationSequence();
         this.collection = collection;
     }
 
     // Methods
-    public int getOperations() {
-        return operations;
-    }
-
-    public Operation[] getSequence() {
-        return sequence;
-    }
-
-    private Operation[] createOperationSequence(int readPercent, int updatePercent, int iteratePercent) {
+    private Operation[] createOperationSequence() {
         Operation[] sequence = new Operation[readPercent+updatePercent+iteratePercent];
         for (int i = 0; i < readPercent; i++) {
             sequence[i] = Operation.READ;

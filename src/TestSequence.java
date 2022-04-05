@@ -25,8 +25,8 @@ public abstract class TestSequence {
         this.iteratePercent = iteratePercent;
 
         this.collection = createCollectionToTest();
-        this.testers = createTester(numberOfThreads, readPercent, updatePercent, iteratePercent, collection);
-        this.threads = createThreads(this.testers);
+        this.testers = createTester();
+        this.threads = createThreads();
 
         warmUpTest();
         runTest();
@@ -35,14 +35,14 @@ public abstract class TestSequence {
     // Methods
     abstract protected CollectionToTest createCollectionToTest();
 
-    private Tester[] createTester(int numberOfThreads, int readPercent, int updatePercent, int iteratePercent, CollectionToTest collection) {
+    private Tester[] createTester() {
         Tester[] testers = new Tester[numberOfThreads];
         for (int i = 0; i < testers.length; i++) {
             testers[i] = new Tester(readPercent, updatePercent, iteratePercent, collection);
         }
         return testers;
     }
-    private Thread[] createThreads(Tester[] testers) {
+    private Thread[] createThreads() {
         Thread[] threads = new Thread[testers.length];
         for (int i = 0; i < threads.length; i++) {
             threads[i] = new Thread(testers[i]);
