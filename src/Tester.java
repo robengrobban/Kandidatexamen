@@ -34,6 +34,10 @@ public class Tester implements Runnable {
         return sequence;
     }
 
+    public int getOperations() {
+        return this.operations;
+    }
+
     @Override
     public void run() {
         int currentOperation = 0;
@@ -51,6 +55,8 @@ public class Tester implements Runnable {
                     collection.iterateOperation();
                     operations++;
                     break;
+                default:
+                    throw new IllegalArgumentException();
             }
             currentOperation++;
         } while(!Thread.currentThread().isInterrupted());

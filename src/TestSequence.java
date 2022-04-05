@@ -4,6 +4,8 @@ public abstract class TestSequence {
 
     // Class variabels
     private static final int WARM_UP_ITERATIONS = 12000;
+    private static final int TEST_LENGTH = 20;
+    private static final int TEST_ITERATIONS = 20;
 
     // Instance variables
     private final int numberOfThreads;
@@ -68,10 +70,13 @@ public abstract class TestSequence {
     }
 
     private void runTest() {
+        for (int i = 0; i < TEST_ITERATIONS; i++) {
 
 
-        collection.resetCollection();
-        System.gc();
+
+            collection.resetCollection();
+            System.gc();
+        }
     }
 
 }
