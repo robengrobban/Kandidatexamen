@@ -19,6 +19,7 @@ public abstract class TestSequence {
     private Tester[] testers;
     private Thread[] threads;
     private final CollectionToTest collection;
+    private final List<Integer> startCollection;
 
     private final Observer observer;
 
@@ -36,6 +37,11 @@ public abstract class TestSequence {
         this.collection = createCollectionToTest();
         this.testers = createTester();
         this.threads = createThreads();
+
+        this.startCollection = new ArrayList<>(elements);
+        for (int i = 0; i < elements; i++) {
+            startCollection.add(i);
+        }
 
         warmUpTest();
         runTest();
@@ -59,17 +65,13 @@ public abstract class TestSequence {
         return threads;
     }
 
-    private List<Integer> getRandomCollection() {
-        List<Integer> values = new ArrayList<>(elements);
-        for (int i = 0; i < elements; i++) {
-            values.add(elements);
-        }
-        Collections.shuffle(values);
-        return values;
+    private List<Integer> getRandomStart() {
+        Collections.shuffle(startCollection);
+        return startCollection;
     }
 
     private void warmUpTest() {
-        collection.fillCollection(getRandomCollection());
+        collection.fillCollection(getRandomStart());
 
         for (int i = 0; i < WARM_UP_ITERATIONS; i++) {
             collection.readOperation();
@@ -84,7 +86,7 @@ public abstract class TestSequence {
     private void runTest() {
         for (int i = 0; i < TEST_ITERATIONS; i++) {
             int totalOperations = 0;
-            collection.fillCollection(getRandomCollection());
+            collection.fillCollection(getRandomStart());
 
             try {
                 for (Thread thread : threads) {
@@ -113,6 +115,7 @@ public abstract class TestSequence {
 
             System.gc();
         }
+        System.out.println("DONE");
     }
 
 }

@@ -4,7 +4,7 @@ public class Utilities {
 
     // Methods
     public static int randomInt(int max) {
-        return ThreadLocalRandom.current().nextInt(max);
+        return ThreadLocalRandom.current().nextInt(Math.max(max, 1));
     }
 
     public static void shuffleArray(Object[] array) {
