@@ -1,4 +1,4 @@
-import java.util.Collection;
+import java.util.*;
 
 public interface CollectionToTest {
 
@@ -6,7 +6,7 @@ public interface CollectionToTest {
     Object updateOperation();
     Object iterateOperation();
 
-    Object fillCollection(Collection<Integer> start);
+    Object fillCollection(List<Integer> start);
     Object resetCollection();
 
 }

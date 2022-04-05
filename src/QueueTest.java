@@ -1,13 +1,12 @@
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class QueueTest extends TestSequence {
 
     // Constructors
-    public QueueTest(int numberOfThreads, int readPercent, int updatePercent, int iteratePercent) {
-        super(numberOfThreads, readPercent, updatePercent, iteratePercent);
+    public QueueTest(int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
+        super("Queue", ""+Runtime.version().version().get(0), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
     }
 
     // Methods
@@ -36,7 +35,7 @@ public class QueueTest extends TestSequence {
             }
 
             @Override
-            public Object fillCollection(Collection<Integer> start) {
+            public Object fillCollection(List<Integer> start) {
                 queue.clear();
                 queue.addAll(start);
                 return Collections.unmodifiableCollection(queue);
