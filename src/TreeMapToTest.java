@@ -4,6 +4,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class TreeMapToTest implements CollectionToTest {
+
     private ConcurrentSkipListMap<Integer, Integer> map = new ConcurrentSkipListMap<>();
 
     @Override
