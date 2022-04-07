@@ -4,7 +4,7 @@ import java.util.List;
 public class WarmUpSequence {
 
     // Class Variables
-    private static final int TEST_ITERATIONS = 20000;
+    private static final int TEST_ITERATIONS = 50000;
 
     // Instance Variables
     private final CollectionToTest collection;
@@ -41,6 +41,7 @@ public class WarmUpSequence {
     }
 
     private void warmUpTest() {
+        System.out.println("\t --- WARM UP SEQUENCE START ---");
         collection.fillCollection(startCollection);
 
         for (int i = 0; i < TEST_ITERATIONS; i++) {
