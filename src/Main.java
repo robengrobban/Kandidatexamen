@@ -11,7 +11,7 @@ public class Main {
                 testFor8();
                 break;
             default:
-                System.out.println("Wrong version.... :(");
+                System.out.println("Wrong version.... :O");
         }
     }
 

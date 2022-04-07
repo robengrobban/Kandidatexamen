@@ -1,5 +1,4 @@
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -22,14 +21,18 @@ public class ListToTest implements CollectionToTest {
     @Override
     public Object iterateOperation() {
         AtomicReference<Integer> dummy = new AtomicReference<>(0);
-        list.forEach(dummy::set);
+        list.forEach((value) -> {
+            dummy.set(value);
+        });
         return dummy;
     }
 
     @Override
-    public Object fillCollection(List<Integer> start) {
+    public Object fillCollection(Integer[] start) {
         list.clear();
-        list.addAll(start);
+        for (Integer value : start) {
+            list.add(value);
+        }
         return Collections.unmodifiableCollection(list);
     }
 

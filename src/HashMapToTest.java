@@ -1,5 +1,4 @@
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -14,9 +13,14 @@ public class HashMapToTest implements CollectionToTest {
 
     @Override
     public Object updateOperation() {
-        int dummy = map.remove(Utilities.randomInt(map.size()-ACCESS_SIZE_OFFSET));
-        map.put(dummy, dummy);
-        return dummy;
+        try {
+            int dummy = map.remove(Utilities.randomInt(map.size()-ACCESS_SIZE_OFFSET));
+            map.put(dummy, dummy);
+            return dummy;
+        }
+        catch (Exception ignored) {
+            return updateOperation();
+        }
     }
 
     @Override
@@ -29,11 +33,11 @@ public class HashMapToTest implements CollectionToTest {
     }
 
     @Override
-    public Object fillCollection(List<Integer> start) {
+    public Object fillCollection(Integer[] start) {
         map.clear();
-        start.forEach((value)->{
+        for (Integer value : start) {
             map.put(value, value);
-        });
+        }
         return Collections.unmodifiableCollection(map.keySet());
     }
 

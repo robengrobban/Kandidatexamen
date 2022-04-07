@@ -1,5 +1,4 @@
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -22,14 +21,18 @@ public class QueueToTest implements CollectionToTest {
     @Override
     public Object iterateOperation() {
         AtomicReference<Integer> dummy = new AtomicReference<>(0);
-        queue.forEach(dummy::set);
+        queue.forEach((value) -> {
+            dummy.set(value);
+        });
         return dummy;
     }
 
     @Override
-    public Object fillCollection(List<Integer> start) {
+    public Object fillCollection(Integer[] start) {
         queue.clear();
-        queue.addAll(start);
+        for (Integer value : start) {
+            queue.put(value);
+        }
         return Collections.unmodifiableCollection(queue);
     }
 

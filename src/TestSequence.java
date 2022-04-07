@@ -1,24 +1,21 @@
-import java.util.*;
-
 public class TestSequence {
 
     // Class variabels
-    private static final int WARM_UP_ITERATIONS = 12000;
     private static final int TEST_LENGTH = 500; // 20 * 1000
     private static final int TEST_ITERATIONS = 1; // 20
 
     // Instance variables
     private final String name;
     private final String version;
+    private final CollectionToTest collection;
     private final int numberOfThreads;
     private final int elements;
     private final int readPercent;
     private final int updatePercent;
     private final int iteratePercent;
-    private final CollectionToTest collection;
-    private final List<Integer> startCollection;
     private final Observer observer;
 
+    private final Integer[] startCollection;
     private Tester[] testers;
     private Thread[] threads;
 
@@ -34,10 +31,9 @@ public class TestSequence {
         this.iteratePercent = iteratePercent;
         this.observer = observer;
 
+        this.startCollection = createStartingCollection();
         this.testers = createTester();
         this.threads = createThreads();
-
-        this.startCollection = createStartingCollection();
 
         runTest();
     }
@@ -56,6 +52,13 @@ public class TestSequence {
         new TestSequence("TreeMap", ""+Runtime.version().version().get(0), new TreeMapToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
     }
 
+    private Integer[] createStartingCollection() {
+        Integer[] startingCollection = new Integer[elements];
+        for (int i = 0; i < elements; i++) {
+            startingCollection[i] = i;
+        }
+        return startingCollection;
+    }
     private Tester[] createTester() {
         Tester[] testers = new Tester[numberOfThreads];
         for (int i = 0; i < testers.length; i++) {
@@ -70,20 +73,13 @@ public class TestSequence {
         }
         return threads;
     }
-    private List<Integer> createStartingCollection() {
-        List<Integer> startingCollection = new ArrayList<>(elements);
-        for (int i = 0; i < elements; i++) {
-            startingCollection.add(i);
-        }
-        return startingCollection;
-    }
-    private List<Integer> getRandomStart() {
-        Collections.shuffle(startCollection);
+    private Integer[] getRandomStart() {
+        Utilities.shuffleArray(startCollection);
         return startCollection;
     }
 
     private void runTest() {
-        System.out.println("\t --- TEST SEQUENCE START ---");
+        System.out.print("\tTEST START ... ");
         for (int i = 0; i < TEST_ITERATIONS; i++) {
             int totalOperations = 0;
             collection.fillCollection(getRandomStart());
@@ -99,9 +95,7 @@ public class TestSequence {
                 for (Thread thread : threads) {
                     thread.join();
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            } catch (InterruptedException ignored) {}
 
             for (Tester tester : testers) {
                 totalOperations += tester.getOperations();
@@ -115,7 +109,7 @@ public class TestSequence {
 
             System.gc();
         }
-        System.out.println("\t --- TEST SEQUENCE DONE ---");
+        System.out.println("DONE");
     }
 
 }

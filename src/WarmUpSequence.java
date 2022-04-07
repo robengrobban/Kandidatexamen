@@ -1,20 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class WarmUpSequence {
 
     // Class Variables
-    private static final int TEST_ITERATIONS = 50000;
+    private static final int TEST_ITERATIONS = 20000;
 
     // Instance Variables
     private final CollectionToTest collection;
-    private final List<Integer> startCollection;
+    private final Integer[] startCollection;
 
     // Constructor
     private WarmUpSequence(CollectionToTest collection) {
         this.collection = collection;
         this.startCollection = createStartingCollection();
-
         warmUpTest();
     }
 
@@ -32,16 +28,16 @@ public class WarmUpSequence {
         new WarmUpSequence(new TreeMapToTest());
     }
 
-    private List<Integer> createStartingCollection() {
-        List<Integer> startingCollection = new ArrayList<>(TEST_ITERATIONS);
+    private Integer[] createStartingCollection() {
+        Integer[] startingCollection = new Integer[TEST_ITERATIONS];
         for (int i = 0; i < TEST_ITERATIONS; i++) {
-            startingCollection.add(i);
+            startingCollection[i] = i;
         }
         return startingCollection;
     }
 
     private void warmUpTest() {
-        System.out.println("\t --- WARM UP SEQUENCE START ---");
+        System.out.print("\tWARM UP START ... ");
         collection.fillCollection(startCollection);
 
         for (int i = 0; i < TEST_ITERATIONS; i++) {
@@ -52,7 +48,7 @@ public class WarmUpSequence {
 
         collection.resetCollection();
         System.gc();
-        System.out.println("\t --- WARM UP SEQUENCE DONE ---");
+        System.out.println("DONE");
     }
 
 
