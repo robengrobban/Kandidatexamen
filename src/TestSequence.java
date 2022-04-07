@@ -1,9 +1,8 @@
 import java.util.*;
 
-public abstract class TestSequence {
+public class TestSequence {
 
     // Class variabels
-    protected static final int SIZE_OFFSET = 10;
     private static final int WARM_UP_ITERATIONS = 12000;
     private static final int TEST_LENGTH = 500; // 20 * 1000
     private static final int TEST_ITERATIONS = 1; // 20
@@ -16,17 +15,18 @@ public abstract class TestSequence {
     private final int readPercent;
     private final int updatePercent;
     private final int iteratePercent;
-    private Tester[] testers;
-    private Thread[] threads;
     private final CollectionToTest collection;
     private final List<Integer> startCollection;
-
     private final Observer observer;
 
+    private Tester[] testers;
+    private Thread[] threads;
+
     // Constructors
-    public TestSequence(String name, String version, int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
+    private TestSequence(String name, String version, CollectionToTest collection, int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
         this.name = name;
         this.version = version;
+        this.collection = collection;
         this.numberOfThreads = numberOfThreads;
         this.elements = elements;
         this.readPercent = readPercent;
@@ -34,21 +34,27 @@ public abstract class TestSequence {
         this.iteratePercent = iteratePercent;
         this.observer = observer;
 
-        this.collection = createCollectionToTest();
         this.testers = createTester();
         this.threads = createThreads();
 
-        this.startCollection = new ArrayList<>(elements);
-        for (int i = 0; i < elements; i++) {
-            startCollection.add(i);
-        }
+        this.startCollection = createStartingCollection();
 
-        warmUpTest();
         runTest();
     }
 
     // Methods
-    abstract protected CollectionToTest createCollectionToTest();
+    public static void queue(int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
+        new TestSequence("Queue", ""+Runtime.version().version().get(0), new QueueToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
+    }
+    public static void list(int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
+        new TestSequence("List", ""+Runtime.version().version().get(0), new ListToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
+    }
+    public static void hashMap(int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
+        new TestSequence("HashMap", ""+Runtime.version().version().get(0), new HashMapToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
+    }
+    public static void treeMap(int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
+        new TestSequence("TreeMap", ""+Runtime.version().version().get(0), new TreeMapToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
+    }
 
     private Tester[] createTester() {
         Tester[] testers = new Tester[numberOfThreads];
@@ -64,23 +70,16 @@ public abstract class TestSequence {
         }
         return threads;
     }
-
+    private List<Integer> createStartingCollection() {
+        List<Integer> startingCollection = new ArrayList<>(elements);
+        for (int i = 0; i < elements; i++) {
+            startingCollection.add(i);
+        }
+        return startingCollection;
+    }
     private List<Integer> getRandomStart() {
         Collections.shuffle(startCollection);
         return startCollection;
-    }
-
-    private void warmUpTest() {
-        collection.fillCollection(getRandomStart());
-
-        for (int i = 0; i < WARM_UP_ITERATIONS; i++) {
-            collection.readOperation();
-            collection.updateOperation();
-            collection.iterateOperation();
-        }
-
-        collection.resetCollection();
-        System.gc();
     }
 
     private void runTest() {
@@ -115,7 +114,7 @@ public abstract class TestSequence {
 
             System.gc();
         }
-        System.out.println("DONE");
+        System.out.println("\t --- TEST SEQUENCE DONE ---");
     }
 
 }
