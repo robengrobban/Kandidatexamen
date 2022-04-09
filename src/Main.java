@@ -1,5 +1,3 @@
-import java.sql.Struct;
-
 public class Main {
 
     private static final int[] NUMBER_OF_THREADS = { 1, 3, 6, 12, 24, 48 };
