@@ -2,6 +2,11 @@ public class Main {
 
     private static final int[] NUMBER_OF_THREADS = { 1, 3, 6, 12, 24, 48 };
     private static final int[] NUMBER_OF_ELEMENTS = { 32768, 1048576 };
+    private static final OperationsDistribution[] Operations = {
+            OperationsDistribution.HigRead(),
+            OperationsDistribution.HighMod(),
+            OperationsDistribution.HigIter(),
+            OperationsDistribution.Even()};
 
     // Entry point to tests
     public static void main(String[] args) {
@@ -19,12 +24,6 @@ public class Main {
     }
 
     private static void testFor17() {
-
-        final OperationsDistribution[] Operations = {
-                OperationsDistribution.HigRead(),
-                OperationsDistribution.HighMod(),
-                OperationsDistribution.HigIter(),
-                OperationsDistribution.Even()};
 
         /* ======================================== SECTION QUEUE ======================================== */
         Observer observer = new Observer("Queue-17");
