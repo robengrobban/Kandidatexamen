@@ -2,7 +2,6 @@ public class Main {
 
     private static final int[] NUMBER_OF_THREADS = { 1, 3, 6, 12, 24, 48 };
     private static final int[] NUMBER_OF_ELEMENTS = { 32768, 1048576 };
-    private static final int NUM_ELEMENTS = 32768;
 
     // Entry point to tests
     public static void main(String[] args) {
