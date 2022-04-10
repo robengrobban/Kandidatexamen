@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class HashMapToTest implements CollectionToTest {
 
@@ -25,15 +24,15 @@ public class HashMapToTest implements CollectionToTest {
 
     @Override
     public Object iterateOperation() {
-        AtomicReference<Integer> dummy = new AtomicReference<>(0);
-        map.forEach((key, value) -> {
-            dummy.set(key);
-        });
+        int dummy = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            dummy = entry.getKey();
+        }
         return dummy;
     }
 
     @Override
-    public Object fillCollection(Integer[] start) {
+    public Object fillCollection(List<Integer> start) {
         map.clear();
         for (Integer value : start) {
             map.put(value, value);

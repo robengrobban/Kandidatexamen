@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class ListToTest implements CollectionToTest {
 
@@ -20,19 +19,17 @@ public class ListToTest implements CollectionToTest {
 
     @Override
     public Object iterateOperation() {
-        AtomicReference<Integer> dummy = new AtomicReference<>(0);
-        list.forEach((value) -> {
-            dummy.set(value);
-        });
+        int dummy = 0;
+        for (Integer value : list) {
+            dummy = value;
+        }
         return dummy;
     }
 
     @Override
-    public Object fillCollection(Integer[] start) {
+    public Object fillCollection(List<Integer> start) {
         list.clear();
-        for (Integer value : start) {
-            list.add(value);
-        }
+        list.addAll(start);
         return Collections.unmodifiableCollection(list);
     }
 

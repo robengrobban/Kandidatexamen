@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class WarmUpSequence {
 
     // Class Variables
@@ -5,7 +7,7 @@ public class WarmUpSequence {
 
     // Instance Variables
     private final CollectionToTest collection;
-    private final Integer[] startCollection;
+    private final List<Integer> startCollection;
 
     // Constructor
     private WarmUpSequence(CollectionToTest collection) {
@@ -28,10 +30,10 @@ public class WarmUpSequence {
         new WarmUpSequence(new TreeMapToTest());
     }
 
-    private Integer[] createStartingCollection() {
-        Integer[] startingCollection = new Integer[TEST_ITERATIONS];
+    private List<Integer> createStartingCollection() {
+        List<Integer> startingCollection = new ArrayList<>(TEST_ITERATIONS);
         for (int i = 0; i < TEST_ITERATIONS; i++) {
-            startingCollection[i] = i;
+            startingCollection.add(i);
         }
         return startingCollection;
     }

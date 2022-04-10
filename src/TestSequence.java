@@ -1,8 +1,10 @@
+import java.util.*;
+
 public class TestSequence {
 
     // Class variabels
-    private static final int TEST_LENGTH = 500; // 20 * 1000
-    private static final int TEST_ITERATIONS = 1; // 20
+    private static final int TEST_LENGTH = 1 * 500; // 20 * 1000
+    private static final int TEST_ITERATIONS = 2; // 20
 
     // Instance variables
     private final String name;
@@ -15,7 +17,7 @@ public class TestSequence {
     private final int iteratePercent;
     private final Observer observer;
 
-    private final Integer[] startCollection;
+    private final List<Integer> startCollection;
     private Tester[] testers;
     private Thread[] threads;
 
@@ -52,10 +54,10 @@ public class TestSequence {
         new TestSequence("TreeMap", ""+Runtime.version().version().get(0), new TreeMapToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
     }
 
-    private Integer[] createStartingCollection() {
-        Integer[] startingCollection = new Integer[elements];
+    private List<Integer> createStartingCollection() {
+        List<Integer> startingCollection = new ArrayList<>(elements);
         for (int i = 0; i < elements; i++) {
-            startingCollection[i] = i;
+            startingCollection.add(i);
         }
         return startingCollection;
     }
@@ -73,13 +75,13 @@ public class TestSequence {
         }
         return threads;
     }
-    private Integer[] getRandomStart() {
-        Utilities.shuffleArray(startCollection);
+    private List<Integer> getRandomStart() {
+        Collections.shuffle(startCollection);
         return startCollection;
     }
 
     private void runTest() {
-        System.out.print("TEST START ("+collection+" "+elements+" "+readPercent+"-"+updatePercent+"-"+iteratePercent+" "+numberOfThreads+") ... ");
+        System.out.print("TEST START ("+collection+" "+version+" "+numberOfThreads+" "+elements+" "+readPercent+"-"+updatePercent+"-"+iteratePercent+") ... ");
         for (int i = 0; i < TEST_ITERATIONS; i++) {
             int totalOperations = 0;
             collection.fillCollection(getRandomStart());

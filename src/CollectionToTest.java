@@ -1,3 +1,5 @@
+import java.util.List;
+
 public interface CollectionToTest {
     int ACCESS_SIZE_OFFSET = 50;
 
@@ -5,6 +7,6 @@ public interface CollectionToTest {
     Object updateOperation();
     Object iterateOperation();
 
-    Object fillCollection(Integer[] start);
+    Object fillCollection(List<Integer> start);
     Object resetCollection();
 }
