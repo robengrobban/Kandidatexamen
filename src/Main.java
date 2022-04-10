@@ -1,6 +1,6 @@
 public class Main {
 
-    private static final int[] NUMBER_OF_THREADS = { 1, 3, 6, 12, 24, 48 };
+    private static final int[] NUMBER_OF_THREADS = { 1, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42 };
     private static final int[] NUMBER_OF_ELEMENTS = { 32768, 1048576 };
     private static final OperationsDistribution[] Operations = {
             OperationsDistribution.HigRead(),
