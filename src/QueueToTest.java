@@ -42,4 +42,9 @@ public class QueueToTest implements CollectionToTest {
         return Collections.unmodifiableCollection(queue);
     }
 
+    @Override
+    public String toString() {
+        return "Queue";
+    }
+
 }

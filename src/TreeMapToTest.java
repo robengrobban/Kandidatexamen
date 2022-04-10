@@ -46,4 +46,9 @@ public class TreeMapToTest implements CollectionToTest {
         map = new ConcurrentSkipListMap<>();
         return Collections.unmodifiableCollection(map.keySet());
     }
+
+    @Override
+    public String toString() {
+        return "TreeMap";
+    }
 }

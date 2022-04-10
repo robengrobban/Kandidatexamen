@@ -42,4 +42,9 @@ public class ListToTest implements CollectionToTest {
         return Collections.unmodifiableCollection(list);
     }
 
+    @Override
+    public String toString() {
+        return "List";
+    }
+
 }

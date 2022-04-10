@@ -37,7 +37,7 @@ public class WarmUpSequence {
     }
 
     private void warmUpTest() {
-        System.out.print("\tWARM UP START ... ");
+        System.out.print("WARM UP START ("+collection+") ... ");
         collection.fillCollection(startCollection);
 
         for (int i = 0; i < TEST_ITERATIONS; i++) {

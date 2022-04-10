@@ -79,7 +79,7 @@ public class TestSequence {
     }
 
     private void runTest() {
-        System.out.print("\tTEST START ... ");
+        System.out.print("TEST START ("+collection+" "+elements+" "+readPercent+"-"+updatePercent+"-"+iteratePercent+" "+numberOfThreads+") ... ");
         for (int i = 0; i < TEST_ITERATIONS; i++) {
             int totalOperations = 0;
             collection.fillCollection(getRandomStart());

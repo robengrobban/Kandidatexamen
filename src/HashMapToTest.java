@@ -47,4 +47,9 @@ public class HashMapToTest implements CollectionToTest {
         return Collections.unmodifiableCollection(map.keySet());
     }
 
+    @Override
+    public String toString() {
+        return "HashMap";
+    }
+
 }
