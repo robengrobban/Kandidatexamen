@@ -24,14 +24,14 @@ public class Main {
     }
 
     private static void testFor17() {
-
         /* ======================================== SECTION QUEUE ======================================== */
         Observer observer = new Observer("Queue-17");
         WarmUpSequence.queue();
-        for (int threads : NUMBER_OF_THREADS){
-            for (int num_elem : NUMBER_OF_ELEMENTS) {
-                for (OperationsDistribution op : Operations)
+        for (int num_elem : NUMBER_OF_ELEMENTS) {
+            for (OperationsDistribution op : Operations) {
+                for (int threads : NUMBER_OF_THREADS) {
                     TestSequence.queue(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                }
             }
         }
         observer.writeToFile();
@@ -39,10 +39,11 @@ public class Main {
         /* ========================================= SECTION LIST ======================================== */
         observer = new Observer("List-17");
         WarmUpSequence.list();
-        for (int threads : NUMBER_OF_THREADS) {
-            for (int num_elem : NUMBER_OF_ELEMENTS) {
-                for (OperationsDistribution op : Operations)
+        for (int num_elem : NUMBER_OF_ELEMENTS) {
+            for (OperationsDistribution op : Operations) {
+                for (int threads : NUMBER_OF_THREADS) {
                     TestSequence.list(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                }
             }
         }
         observer.writeToFile();
@@ -50,10 +51,11 @@ public class Main {
         /* ======================================= SECTION HASHMAP ======================================= */
         observer = new Observer("HashMap-17");
         WarmUpSequence.hashMap();
-        for (int threads : NUMBER_OF_THREADS) {
-            for (int num_elem : NUMBER_OF_ELEMENTS) {
-                for (OperationsDistribution op : Operations)
+        for (int num_elem : NUMBER_OF_ELEMENTS) {
+            for (OperationsDistribution op : Operations) {
+                for (int threads : NUMBER_OF_THREADS) {
                     TestSequence.hashMap(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                }
             }
         }
         observer.writeToFile();
@@ -61,17 +63,64 @@ public class Main {
         /* ======================================= SECTION TREEMAP ======================================= */
         observer = new Observer("TreeMap-17");
         WarmUpSequence.treeMap();
-        for (int threads : NUMBER_OF_THREADS) {
-            for (int num_elem : NUMBER_OF_ELEMENTS) {
-                for (OperationsDistribution op : Operations)
+        for (int num_elem : NUMBER_OF_ELEMENTS) {
+            for (OperationsDistribution op : Operations) {
+                for (int threads : NUMBER_OF_THREADS) {
                     TestSequence.treeMap(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                }
             }
         }
         observer.writeToFile();
     }
 
     private static void testFor8() {
+        /* ======================================== SECTION QUEUE ======================================== */
+        Observer observer = new Observer("Queue-8");
+        WarmUpSequence.queue();
+        for (int num_elem : NUMBER_OF_ELEMENTS) {
+            for (OperationsDistribution op : Operations) {
+                for (int threads : NUMBER_OF_THREADS) {
+                    TestSequence.queue(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                }
+            }
+        }
+        observer.writeToFile();
 
+        /* ========================================= SECTION LIST ======================================== */
+        observer = new Observer("List-8");
+        WarmUpSequence.list();
+        for (int num_elem : NUMBER_OF_ELEMENTS) {
+            for (OperationsDistribution op : Operations) {
+                for (int threads : NUMBER_OF_THREADS) {
+                    TestSequence.list(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                }
+            }
+        }
+        observer.writeToFile();
+
+        /* ======================================= SECTION HASHMAP ======================================= */
+        observer = new Observer("HashMap-8");
+        WarmUpSequence.hashMap();
+        for (int num_elem : NUMBER_OF_ELEMENTS) {
+            for (OperationsDistribution op : Operations) {
+                for (int threads : NUMBER_OF_THREADS) {
+                    TestSequence.hashMap(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                }
+            }
+        }
+        observer.writeToFile();
+
+        /* ======================================= SECTION TREEMAP ======================================= */
+        observer = new Observer("TreeMap-8");
+        WarmUpSequence.treeMap();
+        for (int num_elem : NUMBER_OF_ELEMENTS) {
+            for (OperationsDistribution op : Operations) {
+                for (int threads : NUMBER_OF_THREADS) {
+                    TestSequence.treeMap(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                }
+            }
+        }
+        observer.writeToFile();
     }
 
 }
