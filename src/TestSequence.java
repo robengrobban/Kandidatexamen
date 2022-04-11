@@ -42,16 +42,16 @@ public class TestSequence {
 
     // Methods
     public static void queue(int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
-        new TestSequence("Queue", ""+Runtime.version().version().get(0), new QueueToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
+        new TestSequence("Queue", System.getProperty("java.version"), new QueueToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
     }
     public static void list(int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
-        new TestSequence("List", ""+Runtime.version().version().get(0), new ListToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
+        new TestSequence("List", System.getProperty("java.version"), new ListToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
     }
     public static void hashMap(int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
-        new TestSequence("HashMap", ""+Runtime.version().version().get(0), new HashMapToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
+        new TestSequence("HashMap", System.getProperty("java.version"), new HashMapToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
     }
     public static void treeMap(int numberOfThreads, int elements, int readPercent, int updatePercent, int iteratePercent, Observer observer) {
-        new TestSequence("TreeMap", ""+Runtime.version().version().get(0), new TreeMapToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
+        new TestSequence("TreeMap", System.getProperty("java.version"), new TreeMapToTest(), numberOfThreads, elements, readPercent, updatePercent, iteratePercent, observer);
     }
 
     private List<Integer> createStartingCollection() {

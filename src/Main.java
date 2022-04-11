@@ -10,7 +10,7 @@ public class Main {
 
     // Entry point to tests
     public static void main(String[] args) {
-        int version = Runtime.version().version().get(0);
+        String version = System.getProperty("java.version");
         /* ======================================== SECTION QUEUE ======================================== */
         Observer observer = new Observer("Queue-"+version);
         WarmUpSequence.queue();
