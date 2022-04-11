@@ -7,13 +7,13 @@ public class HashMapToTest implements CollectionToTest {
 
     @Override
     public Object readOperation() {
-        return map.get(Utilities.randomInt(map.size()-ACCESS_SIZE_OFFSET));
+        return map.get(Utilities.randomInt(map.size()- ACCESS_SIZE_INSET));
     }
 
     @Override
     public Object updateOperation() {
         try {
-            int dummy = map.remove(Utilities.randomInt(map.size()-ACCESS_SIZE_OFFSET));
+            int dummy = map.remove(Utilities.randomInt(map.size()- ACCESS_SIZE_INSET));
             map.put(dummy, dummy);
             return dummy;
         }

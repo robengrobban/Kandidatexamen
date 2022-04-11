@@ -7,12 +7,12 @@ public class ListToTest implements CollectionToTest {
 
     @Override
     public Object readOperation() {
-        return list.get(Utilities.randomInt(list.size()-ACCESS_SIZE_OFFSET));
+        return list.get(Utilities.randomInt(list.size()- ACCESS_SIZE_INSET));
     }
 
     @Override
     public Object updateOperation() {
-        int dummy = list.remove(Utilities.randomInt(list.size()-ACCESS_SIZE_OFFSET));
+        int dummy = list.remove(Utilities.randomInt(list.size()- ACCESS_SIZE_INSET));
         list.add(dummy);
         return dummy;
     }

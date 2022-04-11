@@ -1,7 +1,7 @@
 import java.util.List;
 
 public interface CollectionToTest {
-    int ACCESS_SIZE_OFFSET = 50;
+    int ACCESS_SIZE_INSET = 100;
 
     Object readOperation();
     Object updateOperation();
