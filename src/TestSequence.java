@@ -3,8 +3,8 @@ import java.util.*;
 public class TestSequence {
 
     // Class variabels
-    private static final int TEST_LENGTH = 1 * 500; // 20 * 1000
-    private static final int TEST_ITERATIONS = 2; // 20
+    private static final int TEST_LENGTH = 20 * 1000; // 20 * 1000
+    private static final int TEST_ITERATIONS = 20; // 20
 
     // Instance variables
     private final String name;
