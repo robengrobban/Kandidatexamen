@@ -3,10 +3,11 @@ public class Main {
     private static final int[] NUMBER_OF_THREADS = { 1, 3, 6, 12, 24, 48 };
     private static final int[] NUMBER_OF_ELEMENTS = { 32768, 185363, 1048576 };
     private static final OperationsDistribution[] Operations = {
-            OperationsDistribution.HigRead(),
-            OperationsDistribution.HighMod(),
-            OperationsDistribution.HigIter(),
-            OperationsDistribution.Even()};
+            OperationsDistribution.highRead(),
+            OperationsDistribution.highUpdate(),
+            OperationsDistribution.highIterate(),
+            OperationsDistribution.even()
+    };
 
     // Entry point to tests
     public static void main(String[] args) {
@@ -17,7 +18,7 @@ public class Main {
         for (int num_elem : NUMBER_OF_ELEMENTS) {
             for (OperationsDistribution op : Operations) {
                 for (int threads : NUMBER_OF_THREADS) {
-                    TestSequence.queue(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                    TestSequence.queue(threads, num_elem, op.getReadPercent(), op.getUpdatePercent(), op.getIteratePercent(), observer);
                 }
             }
         }
@@ -29,7 +30,7 @@ public class Main {
         for (int num_elem : NUMBER_OF_ELEMENTS) {
             for (OperationsDistribution op : Operations) {
                 for (int threads : NUMBER_OF_THREADS) {
-                    TestSequence.list(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                    TestSequence.list(threads, num_elem, op.getReadPercent(), op.getUpdatePercent(), op.getIteratePercent(), observer);
                 }
             }
         }
@@ -41,7 +42,7 @@ public class Main {
         for (int num_elem : NUMBER_OF_ELEMENTS) {
             for (OperationsDistribution op : Operations) {
                 for (int threads : NUMBER_OF_THREADS) {
-                    TestSequence.hashMap(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                    TestSequence.hashMap(threads, num_elem, op.getReadPercent(), op.getUpdatePercent(), op.getIteratePercent(), observer);
                 }
             }
         }
@@ -53,7 +54,7 @@ public class Main {
         for (int num_elem : NUMBER_OF_ELEMENTS) {
             for (OperationsDistribution op : Operations) {
                 for (int threads : NUMBER_OF_THREADS) {
-                    TestSequence.treeMap(threads, num_elem, op.READ, op.UPDATE, op.ITERATE, observer);
+                    TestSequence.treeMap(threads, num_elem, op.getReadPercent(), op.getUpdatePercent(), op.getIteratePercent(), observer);
                 }
             }
         }
