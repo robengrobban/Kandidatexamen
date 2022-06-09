@@ -43,9 +43,12 @@ public class WarmUpSequence {
         collection.fillCollection(startCollection);
 
         for (int i = 0; i < TEST_ITERATIONS; i++) {
-            collection.readOperation();
-            collection.updateOperation();
-            collection.iterateOperation();
+            Object dummyOne = collection.readOperation();
+            Object dummyTwo = collection.updateOperation();
+            Object dummyThree = collection.iterateOperation();
+            if ( dummyOne.hashCode() == 0 || dummyTwo.hashCode() == 0 || dummyThree.hashCode() == 0 ) {
+                System.out.print("!");
+            }
         }
 
         collection.resetCollection();

@@ -42,21 +42,25 @@ public class Tester implements Runnable {
     public void run() {
         int currentOperation = 0;
         do {
+            Object dummy;
             switch (sequence[currentOperation % sequence.length]) {
                 case READ:
-                    collection.readOperation();
+                    dummy = collection.readOperation();
                     operations++;
                     break;
                 case UPDATE:
-                    collection.updateOperation();
+                    dummy = collection.updateOperation();
                     operations++;
                     break;
                 case ITERATE:
-                    collection.iterateOperation();
+                    dummy = collection.iterateOperation();
                     operations++;
                     break;
                 default:
                     throw new IllegalArgumentException();
+            }
+            if ( dummy.hashCode() == 0 ) {
+                System.out.print("!");
             }
             currentOperation++;
         } while(!Thread.currentThread().isInterrupted());
